@@ -34,6 +34,16 @@ Then open http://localhost:8080/.
 node tools/make-catalogues.js
 ```
 
+## Theme and gallery
+
+The site opens in the dark gradient theme. The sun/moon button in the header swaps
+to the light theme, and the choice is stored in `localStorage` under
+`udhyog-theme`, so each page repaints before its first frame.
+
+The home page gallery pulls photographs from `assets/gallery/`. Those files are
+placeholder CC0 stock images (see `assets/gallery/CREDITS.md`) and should be
+swapped for photographs of the company's own products.
+
 ## Before publishing
 
 All business details are placeholders and must be replaced with real ones: address,
