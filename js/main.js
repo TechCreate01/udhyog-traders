@@ -2,6 +2,42 @@
 (function () {
   "use strict";
 
+  /* Theme toggle --------------------------------------------------------- */
+  var root = document.documentElement;
+  var themeButtons = document.querySelectorAll("[data-theme-toggle]");
+
+  function applyTheme(mode) {
+    var light = mode === "light";
+
+    if (light) {
+      root.setAttribute("data-theme", "light");
+    } else {
+      root.removeAttribute("data-theme");
+    }
+
+    try {
+      localStorage.setItem("udhyog-theme", light ? "light" : "dark");
+    } catch (error) {
+      /* storage blocked - the toggle still works for this visit */
+    }
+
+    themeButtons.forEach(function (button) {
+      button.setAttribute("aria-pressed", String(light));
+      button.setAttribute(
+        "aria-label",
+        light ? "Switch to dark theme" : "Switch to light theme"
+      );
+    });
+  }
+
+  themeButtons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      applyTheme(root.getAttribute("data-theme") === "light" ? "dark" : "light");
+    });
+  });
+
+  applyTheme(root.getAttribute("data-theme") === "light" ? "light" : "dark");
+
   /* Mobile navigation ---------------------------------------------------- */
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".nav");
