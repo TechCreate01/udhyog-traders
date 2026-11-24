@@ -3,21 +3,24 @@
    ========================================================================== */
 
 :root {
-  --ink: #0d1117;
-  --ink-soft: #1a2028;
-  --body: #4b5563;
-  --steel: #6b7482;
-  --line: #e4e7ec;
-  --paper: #ffffff;
-  --sand: #f6f4f0;
-  --accent: #f26a1b;
-  --accent-dark: #d4550c;
-  --accent-soft: rgba(242, 106, 27, 0.1);
+  --ink: #eef3fa;
+  --ink-soft: #cbd7e7;
+  --body: #a4b2c5;
+  --steel: #8593a8;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.2);
+  --paper: #080c12;
+  --surface: #111a26;
+  --sand: #0c141d;
+  --deep: #05080d;
+  --accent: #ff7a2f;
+  --accent-dark: #ff9558;
+  --accent-soft: rgba(255, 122, 47, 0.14);
 
   --radius: 14px;
   --radius-sm: 10px;
-  --shadow-sm: 0 1px 2px rgba(13, 17, 23, 0.05), 0 10px 26px -20px rgba(13, 17, 23, 0.4);
-  --shadow-lg: 0 28px 70px -34px rgba(13, 17, 23, 0.5);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.55), 0 18px 40px -28px rgba(0, 0, 0, 0.9);
+  --shadow-lg: 0 34px 90px -40px rgba(0, 0, 0, 0.95);
 
   --font-display: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
   --font-body: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -41,7 +44,13 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(1150px 620px at 8% -10%, rgba(255, 122, 47, 0.18), transparent 62%),
+    radial-gradient(900px 620px at 96% 2%, rgba(56, 132, 255, 0.16), transparent 62%),
+    radial-gradient(1200px 800px at 50% 112%, rgba(122, 84, 255, 0.12), transparent 66%),
+    linear-gradient(180deg, #0b111a 0%, #080c12 46%, #05080d 100%);
+  background-attachment: fixed;
   color: var(--body);
   font-family: var(--font-body);
   font-size: 1rem;
@@ -102,7 +111,7 @@ ol {
 }
 
 :focus-visible {
-  outline: 4px solid rgba(242, 106, 27, 0.35);
+  outline: 4px solid rgba(255, 122, 47, 0.55);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -113,7 +122,7 @@ ol {
   top: -100px;
   z-index: 100;
   padding: 0.75rem 1.25rem;
-  background: var(--ink);
+  background: var(--deep);
   color: #fff;
   border-radius: 0 0 8px 8px;
   font-size: 0.9rem;
@@ -140,7 +149,8 @@ ol {
 }
 
 .section--sand {
-  background: var(--sand);
+  background: rgba(255, 255, 255, 0.022);
+  border-block: 1px solid var(--line);
 }
 
 .section--tight {
@@ -230,25 +240,25 @@ ol {
 
 .btn--ghost {
   background: transparent;
-  border-color: #cfd4dc;
+  border-color: var(--line-strong);
   color: var(--ink);
 }
 
 .btn--ghost:hover {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--line-strong);
+  color: var(--ink);
   box-shadow: none;
 }
 
 .btn--light {
-  background: #fff;
-  color: var(--ink);
+  background: #f2f6fc;
+  color: #0a0f16;
 }
 
 .btn--light:hover {
-  background: #f0ece6;
-  color: var(--ink);
+  background: #ffffff;
+  color: #0a0f16;
   box-shadow: none;
 }
 
@@ -267,7 +277,7 @@ ol {
    -------------------------------------------------------------------------- */
 
 .topbar {
-  background: var(--ink);
+  background: var(--deep);
   color: #b9c2ce;
   font-size: 0.825rem;
 }
@@ -311,7 +321,7 @@ ol {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(8, 12, 18, 0.82);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(10px);
 }
@@ -372,7 +382,7 @@ ol {
 .nav-links a {
   position: relative;
   padding-block: 0.4rem;
-  color: #3d4653;
+  color: var(--body);
   font-size: 0.93rem;
   font-weight: 500;
   transition: color 0.2s ease;
@@ -412,7 +422,7 @@ ol {
   padding: 0;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--surface);
   color: var(--ink);
   cursor: pointer;
 }
@@ -445,9 +455,10 @@ ol {
 .hero {
   position: relative;
   overflow: hidden;
-  background: var(--sand);
-  background-image: linear-gradient(rgba(13, 17, 23, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(13, 17, 23, 0.045) 1px, transparent 1px);
+  background: transparent;
+  background-image: radial-gradient(760px 420px at 84% -10%, rgba(255, 122, 47, 0.14), transparent 68%),
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
   background-size: 44px 44px;
   border-bottom: 1px solid var(--line);
 }
@@ -489,7 +500,7 @@ ol {
   gap: 0.5rem 1.6rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid #dcd8d0;
+  border-top: 1px solid var(--line);
   color: var(--steel);
   font-size: 0.86rem;
 }
@@ -508,7 +519,7 @@ ol {
 .hero-art {
   position: relative;
   padding: 1.4rem;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
@@ -520,7 +531,7 @@ ol {
   inset: 0 0 auto 0;
   height: 4px;
   border-radius: var(--radius) var(--radius) 0 0;
-  background: linear-gradient(90deg, var(--accent) 0 42%, var(--ink) 42% 100%);
+  background: linear-gradient(90deg, var(--accent) 0 42%, var(--deep) 42% 100%);
 }
 
 .hero-art svg {
@@ -535,7 +546,7 @@ ol {
   gap: 1rem;
   margin-top: 0.9rem;
   padding-top: 0.9rem;
-  border-top: 1px dashed #d8dce2;
+  border-top: 1px dashed var(--line);
   color: var(--steel);
   font-family: var(--font-display);
   font-size: 0.7rem;
@@ -565,7 +576,7 @@ ol {
 
 .stat {
   padding: 1.6rem 1.5rem;
-  background: #fff;
+  background: var(--surface);
 }
 
 .stat strong {
@@ -655,15 +666,15 @@ ol {
 
 .panel {
   padding: clamp(1.5rem, 3vw, 2.25rem);
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
 }
 
 .panel--ink {
-  background: var(--ink);
-  border-color: var(--ink);
+  background: linear-gradient(165deg, #101a26, #070c13);
+  border-color: var(--line);
   color: #b9c2ce;
 }
 
@@ -778,7 +789,7 @@ ol {
   justify-content: space-between;
   gap: 1rem;
   padding-bottom: 0.6rem;
-  border-bottom: 1px dashed rgba(13, 17, 23, 0.1);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
   font-size: 0.9rem;
 }
 
@@ -820,7 +831,7 @@ ol {
   display: flex;
   flex-direction: column;
   padding: 1.85rem 1.6rem;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
@@ -840,7 +851,7 @@ ol {
 
 .card:hover {
   transform: translateY(-3px);
-  border-color: #cdd3db;
+  border-color: var(--line-strong);
   box-shadow: var(--shadow-lg);
 }
 
@@ -950,7 +961,7 @@ ol {
   flex-direction: column;
   gap: 1.2rem;
   padding: 1.9rem 1.7rem;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
@@ -988,7 +999,7 @@ ol {
   height: 40px;
   flex: none;
   border-radius: 50%;
-  background: var(--ink);
+  background: linear-gradient(140deg, #ff9558, #c2410c);
   color: #fff;
   font-family: var(--font-display);
   font-size: 0.82rem;
@@ -1020,7 +1031,7 @@ ol {
 .cta-band {
   position: relative;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--deep);
   background-image: repeating-linear-gradient(
     -45deg,
     rgba(255, 255, 255, 0.035) 0 2px,
@@ -1058,7 +1069,7 @@ ol {
   position: relative;
   overflow: hidden;
   padding-block: clamp(2.75rem, 6vw, 4.5rem);
-  background: var(--ink);
+  background: var(--deep);
   background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
   background-size: 46px 46px;
@@ -1115,7 +1126,7 @@ ol {
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #fff;
+  background: var(--surface);
 }
 
 table {
@@ -1155,7 +1166,7 @@ tbody tr:last-child td {
 }
 
 tbody tr:hover {
-  background: #fbfaf8;
+  background: rgba(255, 255, 255, 0.045);
 }
 
 td strong {
@@ -1193,7 +1204,7 @@ td strong {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--surface);
   border: 2px solid var(--accent);
 }
 
@@ -1233,7 +1244,7 @@ td strong {
   grid-template-columns: 1fr 1fr;
   gap: 1.1rem;
   padding: clamp(1.5rem, 3vw, 2.25rem);
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
@@ -1265,9 +1276,9 @@ td strong {
 .field textarea {
   width: 100%;
   padding: 0.72rem 0.85rem;
-  border: 1px solid #d5dae1;
+  border: 1px solid var(--line-strong);
   border-radius: 7px;
-  background: #fff;
+  background: var(--surface);
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 0.94rem;
@@ -1294,13 +1305,13 @@ td strong {
 
 .field input[aria-invalid="true"],
 .field textarea[aria-invalid="true"] {
-  border-color: #d92d20;
-  box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.12);
+  border-color: #ff6b5e;
+  box-shadow: 0 0 0 3px rgba(255, 107, 94, 0.22);
 }
 
 .field .error {
   min-height: 1rem;
-  color: #b42318;
+  color: #ff948b;
   font-size: 0.78rem;
 }
 
@@ -1316,10 +1327,10 @@ td strong {
   gap: 0.7rem;
   align-items: flex-start;
   padding: 0.9rem 1rem;
-  border: 1px solid #b7e4c7;
+  border: 1px solid rgba(74, 222, 128, 0.42);
   border-radius: 8px;
-  background: #eefaf2;
-  color: #14603a;
+  background: rgba(34, 197, 94, 0.12);
+  color: #6ee7a4;
   font-size: 0.9rem;
 }
 
@@ -1383,11 +1394,11 @@ td strong {
   min-height: 220px;
   margin-top: 1.25rem;
   padding: 1.5rem;
-  border: 1px dashed #c9cfd8;
+  border: 1px dashed var(--line-strong);
   border-radius: var(--radius);
-  background: #fff;
-  background-image: linear-gradient(rgba(13, 17, 23, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(13, 17, 23, 0.04) 1px, transparent 1px);
+  background: var(--surface);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
   background-size: 26px 26px;
   text-align: center;
 }
@@ -1413,7 +1424,7 @@ td strong {
 
 .site-footer {
   padding-top: clamp(3rem, 6vw, 4.5rem);
-  background: var(--ink);
+  background: var(--deep);
   color: #98a2b0;
   font-size: 0.9rem;
 }
@@ -1516,7 +1527,7 @@ td strong {
   display: flex;
   flex-direction: column;
   padding: 1.6rem;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
@@ -1524,7 +1535,7 @@ td strong {
 
 .doc-card:hover {
   transform: translateY(-3px);
-  border-color: #cdd3db;
+  border-color: var(--line-strong);
   box-shadow: var(--shadow-lg);
 }
 
@@ -1656,9 +1667,9 @@ td strong {
     align-items: stretch;
     gap: 0;
     padding: 0.5rem clamp(1.15rem, 4vw, 2.5rem) 1.5rem;
-    background: #fff;
+    background: var(--surface);
     border-bottom: 1px solid var(--line);
-    box-shadow: 0 20px 30px -24px rgba(13, 17, 23, 0.5);
+    box-shadow: 0 20px 30px -24px rgba(0, 0, 0, 0.9);
   }
 
   .nav.is-open {
@@ -1751,4 +1762,76 @@ td strong {
     opacity: 1;
     transform: none;
   }
+}
+
+
+/* --------------------------------------------------------------------------
+   Dark theme polish
+   -------------------------------------------------------------------------- */
+
+html {
+  color-scheme: dark;
+}
+
+.site-header {
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.section--sand {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 60%);
+}
+
+.card,
+.panel,
+.stat,
+.quote-card,
+.doc-card,
+.table-wrap,
+.form,
+.hero-art {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.01));
+}
+
+.card:hover,
+.doc-card:hover {
+  border-color: var(--line-strong);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+}
+
+.hero-art {
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-lg);
+}
+
+.hero-art figcaption {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.panel--ink .spec-list div {
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.eyebrow {
+  color: var(--accent-dark);
+}
+
+.table-wrap thead th {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.field input,
+.field select,
+.field textarea {
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+.doc-action {
+  border-top-color: var(--line);
 }

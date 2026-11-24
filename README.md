@@ -1,6 +1,6 @@
 # UDHyog Traders — website
 
-Static marketing site for UDHyog Traders, an industrial manufacturing and trading
+Static marketing site for UDHyog Traders, a packaging and disposable supplies
 business in Vatva GIDC, Ahmedabad.
 
 No build step and no dependencies: every page is plain HTML, CSS and JavaScript and
@@ -10,8 +10,8 @@ opens directly in a browser or any static host.
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | Home: capabilities, process, quality, testimonials |
-| `products.html` | Production lines, capacity table, materials, quality, catalogue downloads |
+| `index.html` | Home: ranges, process, quality, testimonials |
+| `products.html` | Product ranges, capacity table, materials, quality, catalogue downloads |
 | `about.html` | Company story, leadership, facility |
 | `contact.html` | Contact details and enquiry form |
 
@@ -37,5 +37,5 @@ node tools/make-catalogues.js
 ## Before publishing
 
 All business details are placeholders and must be replaced with real ones: address,
-phone, email, GSTIN, Udyam number, ISO certificate number, machine counts and
-capacities, and the customer testimonials.
+phone, email, GSTIN, FSSAI licence number, Udyam number, ISO certificate number,
+line counts and capacities, and the customer testimonials.
