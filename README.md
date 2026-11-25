@@ -44,6 +44,36 @@ The home page gallery pulls photographs from `assets/gallery/`. Those files are
 placeholder CC0 stock images (see `assets/gallery/CREDITS.md`) and should be
 swapped for photographs of the company's own products.
 
+## Security
+
+The site is static, so there is no server of our own to run limits on. What is
+in place is the hardening a static host can enforce, plus browser-side guards on
+the enquiry form.
+
+**Headers.** A Content-Security-Policy is declared in a `<meta>` tag on every
+page, so it applies even on GitHub Pages, which cannot send custom headers. For
+hosts that can, the same policy is repeated with HSTS, framing, referrer and
+permissions headers in:
+
+| Host | File |
+| --- | --- |
+| Netlify, Cloudflare Pages | `_headers` |
+| Apache, cPanel | `.htaccess` (also forces HTTPS and hides dotfiles) |
+| Vercel | `vercel.json` |
+
+Keep those three in sync when the policy changes. Scripts are restricted to
+`'self'`, which is why the theme preference is read in `js/theme-init.js` rather
+than an inline `<script>`; inline `style` attributes are still used, hence
+`'unsafe-inline'` in `style-src` only.
+
+**Enquiry form.** The contact form rejects submissions that fill its hidden
+honeypot field or arrive less than three seconds after the page loads, and it
+allows three enquiries per ten minutes per browser. Fields are capped with
+`maxlength`. These are deterrents only: a client-side limit can be bypassed and
+cleared, so the real rate limit, spam filtering and validation must live in
+whatever handler the form is eventually pointed at (Formspree, Web3Forms, or
+the company's own endpoint).
+
 ## Before publishing
 
 All business details are placeholders and must be replaced with real ones: address,

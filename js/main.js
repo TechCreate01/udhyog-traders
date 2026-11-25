@@ -105,6 +105,53 @@
   if (form) {
     var status = form.querySelector(".form-status");
     var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    var honeypot = form.elements.namedItem("company_website");
+
+    /* Spam and flood guards. This is a static site with no backend, so these
+       are deterrents stored in the visitor's browser - not enforcement. A real
+       server-side limit belongs in whatever handler the form is pointed at. */
+    var MIN_FILL_MS = 3000;
+    var LIMIT_KEY = "udhyog-enquiry-log";
+    var LIMIT_MAX = 3;
+    var LIMIT_WINDOW_MS = 10 * 60 * 1000;
+    var openedAt = Date.now();
+
+    function recentSubmissions() {
+      try {
+        var stored = JSON.parse(localStorage.getItem(LIMIT_KEY) || "[]");
+        if (!Array.isArray(stored)) return [];
+
+        var now = Date.now();
+        var cutoff = now - LIMIT_WINDOW_MS;
+
+        return stored.filter(function (time) {
+          return typeof time === "number" && time > cutoff && time <= now;
+        });
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function recordSubmission(recent) {
+      try {
+        localStorage.setItem(LIMIT_KEY, JSON.stringify(recent.concat(Date.now())));
+      } catch (error) {
+        /* storage blocked - the limit only covers this page view */
+      }
+    }
+
+    function showStatus(message, isError) {
+      if (!status) return;
+
+      status.classList.add("is-visible");
+      status.classList.toggle("is-error", Boolean(isError));
+      status.setAttribute("role", isError ? "alert" : "status");
+
+      var text = status.querySelector("[data-status-text]");
+      if (text) text.textContent = message;
+
+      status.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
 
     var validators = {
       name: function (value) {
@@ -183,16 +230,46 @@
         return;
       }
 
-      // Static site: no backend wired up. Replace this with a form endpoint
-      // (e.g. Formspree, Web3Forms) or your own handler when deploying.
-      if (status) {
-        status.classList.add("is-visible");
-        status.setAttribute("role", "status");
-        status.querySelector("[data-status-text]").textContent =
+      var recent = recentSubmissions();
+
+      if (recent.length >= LIMIT_MAX) {
+        var waitMinutes = Math.max(
+          1,
+          Math.ceil((recent[0] + LIMIT_WINDOW_MS - Date.now()) / 60000)
+        );
+
+        showStatus(
+          "You have sent " +
+            recent.length +
+            " enquiries in the last few minutes. Please wait about " +
+            waitMinutes +
+            (waitMinutes === 1 ? " minute" : " minutes") +
+            ", or call +91 98250 41230 and we will take the details over the phone.",
+          true
+        );
+        return;
+      }
+
+      // Honeypot filled, or submitted faster than a person could read the form:
+      // report success so bots learn nothing, but record nothing.
+      var botLike =
+        Boolean(honeypot && honeypot.value) || Date.now() - openedAt < MIN_FILL_MS;
+
+      if (!botLike) {
+        recordSubmission(recent);
+
+        // Static site: no backend wired up. Replace this with a form endpoint
+        // (e.g. Formspree, Web3Forms) or your own handler when deploying.
+        var firstName = (form.elements.namedItem("name").value || "there")
+          .trim()
+          .split(" ")[0];
+
+        showStatus(
           "Thank you, " +
-          (form.elements.namedItem("name").value || "there").trim().split(" ")[0] +
-          ". Your enquiry has been recorded — our team responds within one business day.";
-        status.scrollIntoView({ behavior: "smooth", block: "center" });
+            firstName +
+            ". Your enquiry has been recorded — our team responds within one business day.",
+          false
+        );
       }
 
       form.reset();

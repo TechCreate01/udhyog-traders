@@ -3,23 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Products &amp; Ranges — Udhyog Traders</title>
 <meta name="description" content="Corrugated boxes, paper bags, food-grade disposables, films, tapes and tableware from Udhyog Traders, with monthly capacity, board grades and food-contact standards.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<script>
-  (function () {
-    try {
-      if (localStorage.getItem("udhyog-theme") === "light") {
-        document.documentElement.setAttribute("data-theme", "light");
-      }
-    } catch (error) {
-      /* private mode - fall back to the dark default */
-    }
-  })();
-</script>
+<script src="js/theme-init.js"></script>
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>

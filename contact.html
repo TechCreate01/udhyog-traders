@@ -3,23 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Contact &amp; Request a Quote — Udhyog Traders</title>
 <meta name="description" content="Send a SKU list, dieline or sample to Udhyog Traders, Vatva GIDC, Ahmedabad. Quotations on packaging and disposables within two working days, plant visits by appointment.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<script>
-  (function () {
-    try {
-      if (localStorage.getItem("udhyog-theme") === "light") {
-        document.documentElement.setAttribute("data-theme", "light");
-      }
-    } catch (error) {
-      /* private mode - fall back to the dark default */
-    }
-  })();
-</script>
+<script src="js/theme-init.js"></script>
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -96,27 +88,33 @@
 
       <!-- Form -->
       <form class="form" data-contact-form novalidate>
+        <!-- Honeypot: real visitors never see or reach this field. -->
+        <div class="hp-field" aria-hidden="true">
+          <label for="company_website">Company website</label>
+          <input type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="field">
           <label for="name">Full name <span class="req" aria-hidden="true">*</span></label>
-          <input type="text" id="name" name="name" autocomplete="name" placeholder="e.g. Ankit Mehta" required aria-describedby="name-error">
+          <input type="text" id="name" name="name" autocomplete="name" placeholder="e.g. Ankit Mehta" maxlength="100" required aria-describedby="name-error">
           <span class="error" id="name-error" aria-live="polite"></span>
         </div>
 
         <div class="field">
           <label for="company">Company</label>
-          <input type="text" id="company" name="company" autocomplete="organization" placeholder="Company name">
+          <input type="text" id="company" name="company" autocomplete="organization" placeholder="Company name" maxlength="120">
           <span class="error"></span>
         </div>
 
         <div class="field">
           <label for="email">Work email <span class="req" aria-hidden="true">*</span></label>
-          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@company.com" required aria-describedby="email-error">
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@company.com" maxlength="254" required aria-describedby="email-error">
           <span class="error" id="email-error" aria-live="polite"></span>
         </div>
 
         <div class="field">
           <label for="phone">Phone</label>
-          <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+91 98250 00000" aria-describedby="phone-error">
+          <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+91 98250 00000" maxlength="25" aria-describedby="phone-error">
           <span class="error" id="phone-error" aria-live="polite"></span>
         </div>
 
@@ -138,7 +136,7 @@
 
         <div class="field field--full">
           <label for="message">Requirements <span class="req" aria-hidden="true">*</span></label>
-          <textarea id="message" name="message" placeholder="Sizes, board grade or material, print requirement, quantity and delivery date. Mention any SKU codes or dieline revisions." required aria-describedby="message-error"></textarea>
+          <textarea id="message" name="message" maxlength="2000" placeholder="Sizes, board grade or material, print requirement, quantity and delivery date. Mention any SKU codes or dieline revisions." required aria-describedby="message-error"></textarea>
           <span class="error" id="message-error" aria-live="polite"></span>
         </div>
 

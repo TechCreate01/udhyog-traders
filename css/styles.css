@@ -1343,6 +1343,25 @@ td strong {
   margin-top: 0.15rem;
 }
 
+.form-status.is-error {
+  border-color: rgba(255, 107, 94, 0.45);
+  background: rgba(255, 107, 94, 0.12);
+  color: #ff948b;
+}
+
+/* Honeypot: off-screen for people and assistive tech, still filled by bots. */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .info-card {
   padding: 1.6rem;
   border: 1px solid var(--line);
@@ -2006,6 +2025,12 @@ html[data-theme="light"] .form-status {
   border-color: #b7e4c7;
   background: #eefaf2;
   color: #14603a;
+}
+
+html[data-theme="light"] .form-status.is-error {
+  border-color: #f3b5b0;
+  background: #fdf0ef;
+  color: #b42318;
 }
 
 html[data-theme="light"] .map-block {

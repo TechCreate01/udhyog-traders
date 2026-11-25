@@ -1,0 +1,35 @@
+# Security headers for Apache / cPanel shared hosting.
+# Ignored by GitHub Pages, Netlify and Cloudflare Pages.
+
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=(), usb=(), interest-cohort=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set X-Permitted-Cross-Domain-Policies "none"
+</IfModule>
+
+# Serve everything over HTTPS.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# No directory listings.
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+# Do not serve dotfiles such as .git config, .htaccess or .nojekyll.
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+# Do not sniff or execute uploaded-style extensions.
+<FilesMatch "\.(?:cgi|pl|py|sh)$">
+  Require all denied
+</FilesMatch>
